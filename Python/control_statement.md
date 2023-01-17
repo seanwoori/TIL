@@ -120,9 +120,91 @@ value = num % 2 if print('홀수입니다.') else print('짝수입니다.')
 - 반복 횟수를 미리 알고 있을 때.
 - '반복 가능한 객체'를 모두 순회하면 종료. (별도의 종료 조건이 필요 없음.)
 
+- 딕셔너리 순회
+  * 딕셔너리는 기본적으로 key를 순회하며, key를 통해 값을 활용함.
+  * 추가 메서드를 활용하여 순회할 수 있음.
+    * keys() : key로 구성된 결과.
+    * values() : value로 구성된 결과.
+    * items() : (key, value)의 튜플로 구성된 결과.
+
+활용)
+```python
+grades = {'john' : 80, 'eric' : 90}
+for student, grade in grades.items():
+  print(student, grade)
+```
+#### enumerate 순회
+- enumerate()
+  * 인덱스와 객체를 쌍으로 담은 열거형(enumerate) 객체 반환.
+    * (index, value) 형태의 tuple로 구성된 열거 객체를 반환.
+
+```python
+members = ['민수', '영희', '철수']
+
+for idx, member in enumerate(members):
+  print(idx, member)
+
+'''
+0 민수
+1 영희
+2 철수
+'''
+```
+
+#### List Comprehension
+- 표현식과 제어문을 통해 특정한 값을 가진 리스트를 간결하게 생성하는 방법.
+
+기본 문법)
+
+**[code for 변수 in iterable]**
+
+**[code for 변수 in iterable if 조건식]**
+
+기존 list.append 활용 예시)
+```python
+cubic_list = []
+
+for number in range(1, 4):
+  cubic_list.append(number ** 3)
+
+print(cubic_list)
+```
+
+List Comprehension 예시)
+
+```python
+cubic_list = [number ** 3 for number in range(1, 4)]
+
+print(cubic_list)
+```
+
+#### Dictionary Comprehension 
+
+```python
+cubic_dict = {}
+
+for number in range(1, 4):
+  cubic_dict[number] = number ** 3
+
+print(cubic_dict)
+```
+
+List Comprehension 예시)
+
+```python
+cubic_dict = {number: number ** 3 for number in range(1, 4)}
+
+print(cubic_dict)
+```
+
 #### 반복 제어
-- break : 반복문 탈출 
-- continue : 밑에 있는 반복문 code block을 실행하지 않고, 맨 처음으로 돌아가 코드를 실행함. 
+- break 
+  * 반복문을 종료 
+- continue
+  * continue 이후의 code block을 실행하지 않고, 맨 처음으로 돌아가 다음 반복을 실행함. 
 - for-else
+  * 끝까지 반복문을 실핸한 이후에 else문 실행.
+  * break를 통해 중간에 종료되는 경우에는 else문이 실행되지 않음.
 
-
+- pass
+  * 아무것도 하지 않음 (문법적으로 필요하지만, 할 일이 없을 때 사용).
