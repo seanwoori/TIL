@@ -16,11 +16,9 @@ for test_case in range(1, T + 1):
         for char_2 in lst_a:
             if char_1 == char_2:
                 count_num += 1
-        else:
-            count_lst.append(count_num)
-    
-    dict_tidy = dict(zip(unq_lst, count_lst))
-    print(dict_tidy)
-    keys_max = max(dict_tidy, key = dict_tidy.get)
-    print(f'#{test_num} {keys_max}')
+        count_lst.append(count_num)
+
+    dict_ans = dict(zip(unq_lst, count_lst))
+    sort_ans = sorted(dict_ans.items(), key = lambda x : x[1])
+    print(f'#{test_num} {sort_ans[-1][0]}')
 
