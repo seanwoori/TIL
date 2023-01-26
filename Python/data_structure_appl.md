@@ -167,27 +167,210 @@ print(my_dict) # {'apple': '사과', 'banana': '바나나'}
 - 깊은 복사란?
   - 복사하는 대상의 데이터는 동일하나, 주소는 다르게 복사함.
 
+## 얕은/깊은복사를 이해하기 위한 선수지식 : 파이썬의 immutable & mutable 자료형
+### mutable 객체란?
+- 변경이 가능한 객체, 객체의 상태를 변경할 수 있음.
+  - 모든 객체를 각각 생성해서 참조함.
+  - list, set, dictionary
+
+### immutable 객체란?
+- 변경이 불가능한 객체, 객체의 상태를 변경 불가.
+  - 변수에 상관없이 동일한 곳을 참조함. **하나의 immutable 값에 여러 개의 참조**가 붙게 됨. 다만, 값이 같다고 무조건 참조 id가 같은 것은 아니다.
+  - int, float, tuple, str, bool
+
+  예시)
+  ```python
+  # immutable 객체 (상태 변경 X)
+  print("immutable 객체")
+  a = 99
+  b = 99
+  c = 99
+  d = 99
+  e = 99
+
+  print(hex(id(a)))
+  print(hex(id(b)))
+  print(hex(id(c)))
+  print(hex(id(d)))
+  print(hex(id(e)))
+
+
+  # mutable 객체 (상태 변경 O)
+  print("\nmutable 객체")
+  arr1 = [1, 2, 3]
+  arr2 = [1, 2, 3]
+  arr3 = [1, 2, 3]
+  arr4 = [1, 2, 3]
+
+  print(hex(id(arr1)))
+  print(hex(id(arr2)))
+  print(hex(id(arr3)))
+  print(hex(id(arr4)))
+  ```
+![출력값](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FFyttY%2FbtrhNoRmhpk%2FIbvztkruNAEBjZe9rk7dJ0%2Fimg.png)
+
+![출력값 도식도](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F9LEEY%2FbtrhN4d9UF5%2FKShOzdm8mxBwv0cpu6kLnK%2Fimg.png)
+
+### mutable 객체 안에 있는 immutable 객체의 참조값은 어떻게 될까?
+
+```python
+# mutable 객체
+print("=" * 50)
+print("mutable 객체 요소로 존재하는 immutable, mutable")
+print("=" * 50)
+
+arr1 = [55, 66, [11, 22], 'a', 'b']
+arr2 = [55, 66, [11, 22], 'a', 'b']
+
+# 리스트(immutable) 객체의 주소
+print(f"arr1 : {arr1} \t주소 : {hex(id(arr1))}")
+print(f"arr2 : {arr2} \t주소 : {hex(id(arr2))}")
+
+
+# 리스트 내부의 mutable 요소
+print()
+print("-" * 50)
+print('리스트 내부의 mutable 요소들')
+
+print(f"arr1[0] : {arr1[0]} \t주소 : {hex(id(arr1[0]))}")
+print(f"arr2[0] : {arr2[0]} \t주소 : {hex(id(arr2[0]))}")
+
+print(f"arr1[1] : {arr1[1]} \t주소 : {hex(id(arr1[1]))}")
+print(f"arr2[1] : {arr2[1]} \t주소 : {hex(id(arr2[1]))}")
+
+print(f"arr1[3] : {arr1[3]} \t주소 : {hex(id(arr1[3]))}")
+print(f"arr2[3] : {arr2[3]} \t주소 : {hex(id(arr2[3]))}")
+
+print(f"arr1[4] : {arr1[4]} \t주소 : {hex(id(arr1[4]))}")
+print(f"arr2[4] : {arr2[4]} \t주소 : {hex(id(arr2[4]))}")
+
+
+# 리스트 내부의 immutable 요소
+print()
+print("-" * 50)
+print('리스트 내부의 immutable 요소들')
+
+print(f"arr1[2] : {arr1[2]} \t주소 : {hex(id(arr1[2]))}")
+print(f"arr2[2] : {arr2[2]} \t주소 : {hex(id(arr2[2]))}")
+```
+![결과값](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FJCVkH%2FbtrhSMDK9zZ%2FM7tUvVumHVnyRFf9dV7a7k%2Fimg.png)
+
+- arr1와 arr2는 각각 다른 참조 주소를 가리키고 있음.
+- 리스트 내부에 있는 immutable 요소들은 "55, 66, 'a', 'b'"요소 모두 **참조가 동일**한 것을 확인할 수 있음.
+- 리스트 내부에 있는 mutable한 요소들은 참조 주소가 각각 다름.
+- **이러한 이유는 mutable 객체인 리스트 안에 있는 각각의 요소들도 결국은 어떤 값을 가리키는 참조 형태이기 때문.**
+
+
 ### 할당 (assignment)
-- 대입 연산자 (=)를 사용하여 데이터를 식별자에 할당할 수 있음.
+- 대입 연산자 (=)를 사용하여 데이터를 식별자에 할당할 수 있음 (얕은 복사의 일종).
 - 대입 연산자 (=)를 통한 복사는 복사하는 대상 객체에 대한 참조를 복사하는 것이기 때문에, 하단과 같은 결과를 얻음.
   - 즉 해당 주소의 일부 값을 변경하는 경우, 이를 참조하는 모든 변수에 영향을 줌.
 
-```python
-original_list = [1, 2, 3]
-copy_list = original_list
-print(original_list, copy_list) # [1, 2, 3] [1, 2, 3]
+  ```python
+  original_list = [1, 2, 3]
+  copy_list = original_list
+  print(original_list, copy_list) # [1, 2, 3] [1, 2, 3]
 
-copy_list[0] = 'hello'
-print(original_list, copy_list) # ['hello', 2, 3] ['hello', 2, 3]
-```
+  copy_list[0] = 'hello'
+  print(original_list, copy_list) # ['hello', 2, 3] ['hello', 2, 3]
+  ```
 
-### 얕은 복사 (shallow copy)
+### 얕은 복사 [shallow copy, ('=' 대입연산자, [:], copy, copy.copy)]
+- 변수를 복사했다고 생각했지만, 실제로는 **연결**되어 있는 것을 의미함.
+  - 즉, 참조한 id는 동일하기 때문에 같은 변수를 가리키는 것.
 - slice 연산자를 활용하여, 같은 원소를 가진 리스트지만 연산된 결과를 복사함. 이를 통해 **다른 주소**를 할당할 수 있음.
 
+'='대입연산자를 활용한 예시)
+  ```python
+  a = [1, 2, 3]
+  b = a[:]
+  print(a, b) # [1, 2, 3] [1, 2, 3]
+  b[0] = 5
+  print(a,b) # [1, 2, 3] [5, 2, 3]
+  ```
+
+[:]슬라이싱을 이용한 얕은 복사 예시)
 ```python
-a = [1, 2, 3]
-b = a[:]
-print(a, b) # [1, 2, 3] [1, 2, 3]
-b[0] = 5
-print(a,b) # [1, 2, 3] [5, 2, 3]
+print('=' * 50)
+
+arr1 = [4, 5, 6, [2, 4, 8]]
+arr2 = arr1[:]  # 여기서 복사
+
+print("1. 전체 출력")
+print(f'arr1 : {arr1}, add : {hex(id(arr1))}')
+print(f'arr2 : {arr2}, add : {hex(id(arr2))}')
+
+print("\n2. 리스트의 끝에 값 추가")
+arr2.append(22)  # arr2 에 값 추가
+print('arr2.append(22)')
+print(f'arr1 : {arr1}, add : {hex(id(arr1))}')
+print(f'arr2 : {arr2}, add : {hex(id(arr2))}')
+
+# 리스트 안에 있는 리스트
+print("\n3. 리스트 내부 리스트")
+print(f'arr1[3] : {arr1[3]}, add : {hex(id(arr1[3]))}')
+print(f'arr2[3] : {arr2[3]}, add : {hex(id(arr2[3]))}')
+
+print("\n4. 리스트 내부 리스트에 값 추가")
+arr1[3].append(99)
+print('arr1[3].append(99)')
+print(f'arr1[3] : {arr1[3]}, add : {hex(id(arr1[3]))}')
+print(f'arr2[3] : {arr2[3]}, add : {hex(id(arr2[3]))}')
+
+print("\n5. 리스트 전체 다시 확인")
+print(f'arr1 : {arr1}, add : {hex(id(arr1))}')
+print(f'arr2 : {arr2}, add : {hex(id(arr2))}')
 ```
+![출력값](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FMfo3b%2FbtrhWayOtOm%2Fixa8yDhZcwkGnVCSzgavJk%2Fimg.png)
+
+- arr1을 [:]리스트 슬라이싱을 통해 arr2에 복사한 코드.
+- 메모리 주소가 달라 깊은 복사라고 인지할 수 있지만, **리스트 내부 리스트는 같은 주소를 가지고 있음.**
+- 따라서, 하나의 리스트 내부 리스트에 값을 append시킨다면, 다른 리스트에도 값이 추가되는 것을 확인할 수 있음.
+  - **겉에 있는 리스트만 새롭게 객체를 추가하였지만, 사실 내부에 있는 리스트 요소는 하나의 주소를 가리키고 있음.**
+
+### 깊은 복사 [deep copy, (copy.deepcopy)]
+
+- 깊은 복사를 위해서는 copy.deepcopy모듈을 사용해야함.
+  - 이를 통해, 리스트 내부 리스트, 딕셔너리 내부 리스트 등 내부에 있는 객체들 모두 새롭게 주소를 할당할 수 있음. 모든게 **독립적**이 되어버림.
+
+copy.deepcopy 예시)
+```python
+import copy                 # copy 모듈 불러오기
+print('=' * 50)
+
+arr1 = [1, 2, [99, 88, 77], 3]
+arr2 = copy.deepcopy(arr1)      # copy 모듈 깊은 복사
+
+print("1. 전체 출력")
+print(f'arr1 : {arr1}, address : {hex(id(arr1))}')
+print(f'arr2 : {arr2}, address : {hex(id(arr2))}')
+
+print("\n2. 리스트에 새 key, value 추가")
+arr1.append(0)
+print('arr1.append(0)')
+print(f'arr1 : {arr1}, address : {hex(id(arr1))}')
+print(f'arr2 : {arr2}, address : {hex(id(arr2))}')
+
+# 리스트 내부에 리스트 추가
+print("\n3. 리스트 내부 리스트.")
+print(f"arr1[2] : {arr1[2]}, address : {hex(id(arr1[2]))}")
+print(f"arr2[2] : {arr2[2]}, address : {hex(id(arr2[2]))}")
+
+print("\n4. 리스트 내부 리스트에 값 추가")
+arr1[2].append(10)
+print("arr1[2].append(10)")
+print(f"arr1[2] : {arr1[2]}, address : {hex(id(arr1[2]))}")
+print(f"arr2[2] : {arr2[2]}, address : {hex(id(arr2[2]))}")
+
+print("\n5. 리스트 전체 다시 확인")
+print(f'arr1 : {arr1}, address : {hex(id(arr1))}')
+print(f'arr2 : {arr2}, address : {hex(id(arr2))}')
+```
+
+![깊은 복사 예시](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fbgxe8L%2Fbtrh3poOUWp%2FRDZgJW81k8azOB4kBsLmrk%2Fimg.png)
+
+- 리스트 내부 리스트에 값을 추가하여도 전혀 영향이 없는 것을 확인할 수 있음.
+
+![얕은복사'='](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcYFFT4%2FbtrhZnFeE1q%2F72WfN762lRdIpZhkNkpER0%2Fimg.png)
+![얕은복사 [:], list.copy, copy.copy](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FyCzgY%2Fbtrh7ykYNpJ%2FxdF4vdL5sFBKLWRARCVfF0%2Fimg.png)
+![깊은복사 copy.deepcopy](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FS6TlO%2Fbtrh4LZqfOc%2F4omkkPXdasUPnI4DarIrik%2Fimg.png)
