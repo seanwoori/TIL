@@ -9,29 +9,20 @@ for test_case in range(1, T+1):
 
     n_lst = list(map(int, input().split()))
     m_lst = list(map(int, input().split()))
-
-    sum_val_lst = []
     
+    sum_val_lst = []
 
     if n >= m:
         n_lst, m_lst = m_lst, n_lst
+        n, m = m, n
     else:
         pass
-
-    for i in range(len(n_lst)):
-                
-        if i > (len(m_lst) - len(n_lst)):       
-            break
-        else:
-            new_val_n_lst = n_lst
-            new_val_m_lst = m_lst[i:(i+n)]
-            
-            #print(new_val_n_lst)
-            #print(new_val_m_lst)
-            sum_val = 0
-            for i in range(len(new_val_n_lst)):        
-                sum_val += new_val_n_lst[i] * new_val_m_lst[i]
-            sum_val_lst.append(sum_val)
-
+    for i in range(len(m_lst) - len(n_lst)+1):
+        new_val_n_lst = n_lst
+        new_val_m_lst = m_lst[i:(i+n)] # n크기에 맞춰서 m행렬을 재정립
+        sum_val = 0
+        for j in range(len(new_val_n_lst)):        
+            sum_val += new_val_n_lst[j] * new_val_m_lst[j]
+        sum_val_lst.append(sum_val)
     print(f'#{test_case} {max(sum_val_lst)}')        
     # ///////////////////////////////////////////////////////////////////////////////////
