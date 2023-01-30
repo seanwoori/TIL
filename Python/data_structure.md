@@ -54,7 +54,8 @@
   - 문자열을 묶을 때 동일한 문장부호를 활용
   - PEP8에서는 소스코드 내에서 하나의 문장부호를 선택하여 유지하도록 함.
 - 문자열 조회/탐색 및 검증 메소드
-![문자열 조회/탐색 메소드](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbLVx44%2Fbtq8KcLHHqX%2FTze5rZNDblTYA6TuI6x1J0%2Fimg.png)
+
+  ![문자열 조회/탐색 메소드](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbLVx44%2Fbtq8KcLHHqX%2FTze5rZNDblTYA6TuI6x1J0%2Fimg.png)
 
 ### 문자열 조회/탐색
 #### .find(x)
