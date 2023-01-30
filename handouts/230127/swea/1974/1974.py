@@ -14,7 +14,6 @@ for test_case in range(1, T + 1):
     '''
     for i in range(9):
         mat_lst.append(list(map(int, input().split())))
-    #print(mat_lst)
 
     def factorial(n):
         result = 1
@@ -50,7 +49,6 @@ for test_case in range(1, T + 1):
             temp_mat.append(mat.pop(0))        
             for j in range(3):
                 cert *= temp_mat[i].pop(0)
-        print(temp_mat)
         if cert == factorial(9):
             return True
         else:
