@@ -23,13 +23,14 @@ class Pig:
             return change
         else: 
             return '못삼'
+        
+    def sale_price(self, perc, amount):
+        prc = self.order_price(amount)
+        sale_prc = prc * (100-perc) / 100
+        return sale_prc, prc 
 
-    def sale_price(self, amount, perc):
-        price = self.order_price(amount, perc)
-        sale_price = price * (100-perc) / 100
-        return sale_price
 
-    @classmethod
+    @staticmethod
     def func(cls, *args):
         pass
 
@@ -48,8 +49,9 @@ print(a_pig.stock)
 print(b_pig.stock)
 # print(a_pig.order_price(150))
 
-print(b_pig.sale_price(50, 20))
 
 # b 돼지의 가격이 20% 할인됨
 # b 돼지에서 원래 가격도 접근 가능함
 # b 돼지를 50만큼 샀을 때, 원래 가격, 할인된 가격 둘다 반환.
+print(f'원래가격은?: ')
+print(b_pig.sale_price(20, 50))
