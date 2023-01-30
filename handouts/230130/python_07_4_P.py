@@ -26,21 +26,21 @@ class CarSharing:
     def result(self):
         return self.fee_share() + self.insurance() + self.drv_fee()
 
+'''
 def fee(time, dist):
     a = CarSharing(time, dist)
     print(a.result())
-
-
 '''
+
 class fee(CarSharing):
     
     def __init__(self, time, dist):
-        super().__init__()
-        self.time = time
-        self.dist = dist
+        super().__init__(time, dist)
+        #self.time = time
+        #self.dist = dist
         print(self.result())
-__init__(self)는 무조건 하나의 변수를 받아야 하나?
-'''
+#__init__(self)는 무조건 하나의 변수를 받아야 하나?
+
 
 
 fee(600, 50) #=> 91000
