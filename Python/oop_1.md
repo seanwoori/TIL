@@ -1,4 +1,4 @@
-객체지향프로그래밍(Object-Oriented Programming, OOP)
+객체지향프로그래밍(Object-Oriented Programming, OOP)_1
 ==============
 
 ## 객체 지향 프로그래밍
@@ -12,6 +12,10 @@
   - 관객 객체
 - 객체 지향 프로그래밍의 구성
   - 데이터와 기능(메서드) 분리, 추상화된 구조 (인터페이스)
+  - 추상화란?
+    - 다수의 사람이 같은 그림을 보아도 중요하다고 생각한 정보는 각각이 다를 것임. 이를 뽑아서 설계하는 방향은 다르다.
+
+
 ### 객체 지향의 장/단점
   - 장점
     - 객체는 잘 만들어놓으면 계속해서 재사용이 가능 !
@@ -301,3 +305,22 @@
   person1.number_of_population() # 인스턴스에 대해 호출
   person2.number_of_population() # 인스턴스에 대해 호출
   ```
+### 인스턴스와 클래스의 구분
+- 클래스는 설계도 !!
+- 인스턴스는 각각의 객체 특징을 지정할 때 사용.
+- 즉, 어떠한 군집을 다룬다고 생각하면 편하다.
+  - 예를 들어, 정육점에서 돼지고기를 산다고 가정. 
+  - 각각의 돼지 객체에 영향이 없는 정육점의 위치는 클래스 변수.
+  - 반면, 돼지 객체 각각의 가격은 인스턴스 변수. self 사용.
+    ```python
+    class Pig:
+        belly_price = 1000 # 클래스 변수
+
+        def __init__(self, stock):
+            self.stock = stock
+
+        def order_price(self, amount):
+            if self.stock > amount:
+                #return Pig.belly_price * amount
+                return self.belly_price * amount
+    ```
