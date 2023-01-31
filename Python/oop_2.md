@@ -210,3 +210,23 @@
     p1.age = 19
     print(p1.age) # ValueError: Too Young For SSAFY
     ```
+## 예외 처리
+### 예외처리
+- try 문(statement) / except 절(clause)을 이용하여 예외 처리를 할 수 있음
+- try문은 반드시 한 개 이상의 except문이 필요함.
+- try문
+  - 오류가 발생할 가능성이 있는 코드를 실행
+  - 예외가 발생되지 않으면, except 없이 실행 종료
+- except문
+  - 예외가 발생하면, except 절이 실행
+  - 예외 상황을 처리하는 코드를 받아서 적절한 조치를 취함
+
+### 예외 처리 종합
+- try
+  - 코드를 실행함
+- except
+  - try 문에서 예외가 발생 시 실행함
+- else
+  - try문에서 예외가 발생하지 않으면 실행함.
+- finally
+  - 예외 발생 여부와 관계없이 항상 실행함.
