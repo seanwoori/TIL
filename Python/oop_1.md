@@ -77,6 +77,7 @@
 - 클래스는 데이터와 함수를 동시에 가짐.
 
 ### 데코레이터 
+- 함수를 수정하지 않은 상태에서 추가 기능을 구현할 때 사용함.
 - **파이썬의 핵심 기능 중 하나 !**
 - 함수를 어떤 함수로 꾸며서 새로운 기능을 부여.
 - @데코레이터(함수명) 형태로 함수 위에 작성.
@@ -133,6 +134,26 @@
 
   new_function = emoji_decorator(ko_hello) # 즉, new_function은 wrapper함수가 됨.
   new_function('sean') # wrapper('sean')
+  ```
+  
+  ```python
+  def trace(func):
+    def wrapper():
+      print(func.__name__, '함수 시작')
+      func()
+      print(func.__name__, '함수 끝')
+    return wrapper
+  
+  @trace
+  def hello():
+    print('hello')
+
+  @trace
+  def world():
+    print('world')
+  
+  hello()
+  world()
   ```
 
 ## OOP 문법
