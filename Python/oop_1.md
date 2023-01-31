@@ -76,6 +76,64 @@
 - 함수는 기능만 하고 끝남.
 - 클래스는 데이터와 함수를 동시에 가짐.
 
+### 데코레이터 
+- **파이썬의 핵심 기능 중 하나 !**
+- 함수를 어떤 함수로 꾸며서 새로운 기능을 부여.
+- @데코레이터(함수명) 형태로 함수 위에 작성.
+- 순서대로 적용되기 때문에 작성 순서가 중요.
+  - 이는, 어떠한 함수가 있을때, **데코레이터를 여러개 붙여줄 수 있다**는 의미.
+- 데코레이터 예시)
+  wo/ deco
+  ```python
+  def ko_hello(name):
+    print(f'안녕하세요, {name}님!')
+    print('^~^//')
+  
+  def en_hello(name):
+    print(f'Hello, {name}')
+    print('^~^//')
+
+  ko_hello('sean')
+  en_hello('sean')
+  ```
+- 예시) wo/ deco
+  ```python
+  def ko_hello(name):
+    print(f'안녕하세요, {name}님!')
+    print('^~^//')
+  
+  def en_hello(name):
+    print(f'Hello, {name}')
+    print('^~^//')
+
+  def add_emoji(name, func):
+    func(name)
+    print('^~^//')
+
+  add_emoji('sean', ko_hello)
+  add_emoji('sean', en_hello)
+  ```
+- 예시) w/ deco
+  ```python
+  def emoji_decorator(func): # func이라는 함수를 실행하는 함수
+    def wrapper(name) # 추가적으로 name 변수도 넣어줄 것임.
+      func(name)
+      print('^~^//')
+
+    return wrapper # wrapper 함수 정의를 return하고 있음.
+  
+  @emoji_decorator  
+  def ko_hello(name):
+    print(f'안녕하세요, {name}님!')
+
+  @emoji_decorator
+  def en_hello(name):
+    print(f'Hello, {name}')
+    print('^~^//')
+
+  new_function = emoji_decorator(ko_hello) # 즉, new_function은 wrapper함수가 됨.
+  new_function('sean') # wrapper('sean')
+  ```
 
 ## OOP 문법
 ### 기본 문법
@@ -324,3 +382,33 @@
                 #return Pig.belly_price * amount
                 return self.belly_price * amount
     ```
+### 스태틱 메서드
+- 인스턴스 변수, 클래스 변수 아무것도 사용하지 않을때 사용함.
+  - 즉 객체 상태나 클래스 상태를 수정할 수 없음.
+- @staticmethod 데코레이터를 사용하여 정의
+- 일반 함수처럼 동작하지만, 클래스의 이름공간에 귀속됨
+  - **주로 해당 클래스로 기능을 한정하는 용도**
+
+### 메서드 정리
+- 인스턴스 메서드
+  - 메서드를 호출한 인스턴스를 의미하는 self 매개 변수를 통해 인스턴스를 조작.
+- 클래스 메서드
+  - 클래스를 의미하는 cls 매개 변수를 통해 클래스를 조작
+- 스태틱 메서드
+  - 클래스 변수나 인스턴스 변수를 사용하지 않는 경우 사용
+    - 객체 상태나 클래스 상태를 수정할 수 없음
+  예시)
+  ```python
+  class MyClass:
+
+    def method(self):
+      return 'instance method', self
+
+    @classmethod
+    def classmethod(cls):
+      return 'class method', cls
+    
+    @staticmethod
+    def staticmethod():
+      return 'static method'
+  ```
