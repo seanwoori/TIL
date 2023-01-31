@@ -25,6 +25,7 @@
 - 부모클래스의 속성, 메서드가 자식 클래스에 상속되므로, 코드 재사용성이 높아짐.
   
     상속을 통한 메서드 재사용 예시)
+    
     ```python
     class Person:
         def __init__(self, name, age):
@@ -55,6 +56,7 @@
     # 부모 Person 클래스의 talk 메서드를 활용
     s1.talk() # 반갑습니다. 김학생입니다.
     ```
+
 ### 상속 관련 함수와 메서드
 - isinstance(object(인스턴스), classname)
   - classname의 인스턴스이거나, subclass일 경우 True 반환
@@ -63,6 +65,7 @@
   - classinfo의 모든 항목을 검사
 - **super()**
   - 자식클래스에서 부모클래스를 사용하고 싶은 경우
+  
   ```python
   class Person:
     def __init__(self, name, age, number, email):
@@ -79,6 +82,7 @@
         # 이미 상속을 받은 상태라 그런것인가?
         self.student_id = student_id
   ```
+
 ### 상속정리
 - 파이썬의 모든 클래스는 객체로부터 상속됨
 - 부모 클래스의 모든 요소(속성, 메서드)가 상속됨
@@ -170,6 +174,7 @@
     - @property 데코레이터 사용
   - setter 메서드 : 변수의 값을 설정하는 성격의 메서드
     - @변수.setter 사용
+    
     ```python
     class Person:
 
