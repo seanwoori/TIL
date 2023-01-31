@@ -106,6 +106,8 @@
   - 클래스 상속 시, 부모 클래스에서 정의한 메서드를 자식 클래스에서 변경
   - **부모 클래스의 메서드 이름과 기본 기능은 그대로 사용하지만, 특정 기능을 바꾸고 싶을 때 사용**
   - 부모 클래스의 메서드를 실행시키고 싶은 경우 super를 사용
+- 나랑 조금 더 가까운 곳에 있는 메서드를 사용하겠다 !
+
     ```python
     class Person:
         def __init__(self, name):
@@ -201,5 +203,5 @@
     # 실행시켜 확인해보세요.
 
     p1.age = 19
-    print(p1.age) # ValueError: Too Yong For SSAFY
+    print(p1.age) # ValueError: Too Young For SSAFY
     ```
