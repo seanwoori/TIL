@@ -1,7 +1,7 @@
 # Created by https://www.toptal.com/developers/gitignore/api/python,django,macos,windows,git,jupyternotebooks,visualstudio,visualstudiocode,intellij,pycharm,linux
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,django,macos,windows,git,jupyternotebooks,visualstudio,visualstudiocode,intellij,pycharm,linux
 
-### API KEYS ###
+##### API KEYS #####
 config.py
 
 ### Django ###
