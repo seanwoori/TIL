@@ -10,19 +10,19 @@ mat = list([0]*n for _ in range(n)) # 매트릭스 정의
 idx=[1]+list(i-1 for i in range(1,n+1,2) if i != 1) # 인덱스 리스트 생성
 
 
-for iter,id in enumerate(idx): # [1, 2, 4]
-    if iter == 0:
+for itera,ida in enumerate(idx): # [1, 2, 4]
+    if itera == 0:
         mat[mcri][mcri] = lst.pop(0)
         continue
     else:
-        for i in range(id):
-            mat[mcri-iter][mcri-(iter-1)+i] = lst.pop(0)
-        for i in range(id):
-            mat[mcri-(iter-1)+i][mcri+iter] = lst.pop(0)
-        for i in range(id):
-            mat[mcri+iter][mcri+(iter-1)-i] = lst.pop(0)  # 두개의 리스트 동시에 덮어쓸 수 없음.
-        for i in range(id):
-            mat[mcri+(iter-1)-i][mcri-iter] = lst.pop(0)
+        for i in range(ida):
+            mat[mcri-itera][mcri-(itera-1)+i] = lst.pop(0)
+        for i in range(ida):
+            mat[mcri-(itera-1)+i][mcri+itera] = lst.pop(0)
+        for i in range(ida):
+            mat[mcri+itera][mcri+(itera-1)-i] = lst.pop(0)  # 두개의 리스트 동시에 덮어쓸 수 없음.
+        for i in range(ida):
+            mat[mcri+(itera-1)-i][mcri-itera] = lst.pop(0)
 
 
 def find(a,mat): # 원소 찾는 함수 정의
@@ -33,7 +33,7 @@ def find(a,mat): # 원소 찾는 함수 정의
             if a == mat[m][k]:
                 return m, k  # x, y 좌표 순서 유의하기
 
-for lst in mat:
+for i, lst in enumerate(mat):
     print(*lst)
 
 ans1, ans2 = find(x,mat)
