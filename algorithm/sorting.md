@@ -95,7 +95,7 @@ Sorting
   quick_sort(arr, 0, len(arr)-1)
   print(arr)
   ```
-- 파이썬의 장점을 살린 퀵정렬 소스코드
+- 파이썬의 장점을 살린i 퀵정렬 소스코드
   ```python
   arr = [5, 7, 9, 0, 3, 1, 6, 2, 4, 8]
 

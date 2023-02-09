@@ -49,16 +49,36 @@ String_1
   - 최악의 경우 텍스트의 모든 위치에서 패턴을 비교해야 하므로 $O(MN)$이 됨.
 
 ### KMP 알고리즘
+- **불일치가 발생하기 직전까지 같았던 부분은 다시 비교하지 않고 패턴 매칭을 진행하자** 
 - 불일치가 발생한 텍스트 스트링의 앞 부분에 어떤 문자가 있는지를 미리 알고 있으므로, 불일치가 발생한 앞 부분에 대하여 다시 비교하지 않고 매칭을 수행.
-- 패턴을 전처리하여 배열 next[M]을 구해서 잘못된 시작을 최소화함.
-  - next[M] : 불일치가 발생했을 경우 이동할 다음 위치
+- 접두부, 접미부 그리고 경계
+  - 접두부와 접미부는 다음의 경우를 말하며, 전체 문자열이 될 수는 없음.
+  ![접두부 접미부 설명](https://github.com/ChanhuiSeok/chanhuiseok.github.io/blob/master/assets/img/sample/algo14_2.PNG?raw=true)
+  - 경계란 접두부와 접미부가 같을 때 그 접두부 혹은 접미부를 경계라고함.
+    - 경계가 두 가지 이상 나올 경우, 경계의 길이가 최대가 될 때를 선택함.
+  - 이후, 찾으려는 패턴을 접미부의 시작 문자열까지 이동시킴.
+  ![패턴 이동 설명](https://github.com/ChanhuiSeok/chanhuiseok.github.io/blob/master/assets/img/sample/algo14_7.PNG?raw=true)
+  - 패턴을 전처리하여 배열 next[M]을 구해서 잘못된 시작을 최소화함.
+    - next[M] : 불일치가 발생했을 경우 이동할 다음 위치
 - 시간 복잡도
   - $O(M+N)$
 
 ### 보이어-무어 알고리즘
-- 오른쪽에서 왼쪽으로 비교
+- **오른쪽에서 왼쪽으로 비교.** 뒷부분에서 불일치가 일어날 확률이 높다는 성질을 이용함.
 - 대부분의 상용 소프트웨어에서 채택하고 있는 알고리즘
-- 보이어-무어 알고리즘은 패턴에 오른쪽 끝에 있는 문자가 불일치하고 이 문자가 패턴 내에 존재하지 않는 경우, 이동 거리가 패턴의 길이만큼이 됨.
+- 패턴의 오른쪽 끝에 있는 문자와 본문을 비교하여 일치 여부를 판단함. 불일치하고, 이 문자가 패턴에 존재하지 않는다면 패턴의 길이만큼 패턴을 이동시킴.
+  ![보이어-무어 알고리즘_1](https://github.com/ChanhuiSeok/chanhuiseok.github.io/blob/master/assets/img/sample/algo15_1.PNG?raw=true)
+- 만일 패턴의 오른쪽 끝에 있는 문자가 분문 문자와는 불일치하지만, 패턴에는 존재한다면, **패턴의 오른쪽 끝에서부터 그 문자까지의 칸 수를 세서 그만큼 이동시킴.**
+- 따라서 이동시킬 칸 수를 저장할 skip 배열을 따로 저장해야함.
+  ![보이어-무어 알고리즘_2](https://github.com/ChanhuiSeok/chanhuiseok.github.io/blob/master/assets/img/sample/algo15_3.PNG?raw=true)
+  ![보이어-무어 알고리즘_3](https://github.com/ChanhuiSeok/chanhuiseok.github.io/blob/master/assets/img/sample/algo15_4.PNG?raw=true)
+  ![보이어-무어 알고리즘_4](https://github.com/ChanhuiSeok/chanhuiseok.github.io/blob/master/assets/img/sample/algo15_6.PNG?raw=true)
+  ![보이어-무어 알고리즘_5](https://github.com/ChanhuiSeok/chanhuiseok.github.io/blob/master/assets/img/sample/algo15_8.PNG?raw=true)
+  ![보이어-무어 알고리즘_6](https://github.com/ChanhuiSeok/chanhuiseok.github.io/blob/master/assets/img/sample/algo15_9.PNG?raw=true)
+  ![보이어-무어 알고리즘_7](https://github.com/ChanhuiSeok/chanhuiseok.github.io/blob/master/assets/img/sample/algo15_10.PNG?raw=true)
+- 본문의 문자와 패턴을 차례로 다 비교해서 모두 일치했을 경우 검색이 완료.
+- 본문이 뒤에 더 있을 경우, 검색 완료 후에도 패턴의 길이만큼 다시 점프해서 검색을 진행.
+
 - 시간 복잡도
   - 앞의 두 매칭 알고리즘들의 공통점은 텍스트 문자열의 문자를 적어도 한번씩 훑는다는 것. 따라서 최선의 경우에도 $O(n)$
   - 보이어-무어 알고리즘은 텍스트 문자를 다 보지 않아도 된다.

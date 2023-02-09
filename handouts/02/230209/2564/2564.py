@@ -3,9 +3,13 @@ sys.stdin = open('input.txt', 'r')
 
 garo, sero = map(int, input().split())
 n = int(input()) # 북 : 1, 남 : 2, 서 : 3, 동 : 4
+                 # 북 혹은 남에 위치한 경우 왼쪽으로부터의 거리
+                 # 서 혹은 동에 위치한 경우 위쪽으로부터의 거리
+                 # 마지막 줄에는 동근이의 위치
 lst = list(list(map(int, input().split())) for _ in range(n+1))
 
 a = [0] * (2*garo + 2*sero)
+
 
 
 # 동근이의 위치가 기준점.
