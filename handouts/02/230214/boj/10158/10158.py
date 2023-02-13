@@ -4,7 +4,7 @@ sys.stdin = open('input.txt', 'r')
 ei, ej = map(int, input().split())
 si, sj = map(int, input().split())
 t = int(input())
-
+'''
 di = [1, -1,-1, 1]
 dj = [1, 1, -1, -1]
 dr=k=0
@@ -17,14 +17,18 @@ while True:
         k+=1
     else:
         dr=(dr+1)%4
+'''
+mi=(si+t)//ei
+mj=(sj+t)//ej
 
-        if i==si and j==sj and dr==0 and k>2:
-            t=t%k # 만약 k번 이동했는데 시작점이라면,
-            k=0
+if not mi%2:
+    i=(si+t)%ei
+else:
+    i=ei-(si+t)%ei
 
-    if k>=t:
-        break
-
-
+if not mj%2:
+    j=(sj+t)%ej
+else:
+    j=ej-(sj+t)%ej
 
 print(f'{i} {j}')
