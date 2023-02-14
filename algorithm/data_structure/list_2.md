@@ -14,90 +14,89 @@ List_2
 ### 배열 순회
 - $n * m$ 배열의 모든 원소를 빠짐없이 조사하는 방법
 - 행 우선 순회
-  
-  ```python
-  # i 행의 좌표
-  # j 열의 좌표
-  
-  for i in range(n):
-    for k in range(m):
-      Array[i][j] # 필요한 연산 수행
-  ```
+    ```python
+    # i 행의 좌표
+    # j 열의 좌표
+    
+    for i in range(n):
+      for k in range(m):
+        Array[i][j] # 필요한 연산 수행
+    ```
 
 - 열 우선 순회
   
-  ```python
-  # i 행의 좌표
-  # j 열의 좌표
-  
-  for j in range(m):
-    for k in range(n):
-      Array[i][j] # 필요한 연산 수행
-  ```
+    ```python
+    # i 행의 좌표
+    # j 열의 좌표
+    
+    for j in range(m):
+      for k in range(n):
+        Array[i][j] # 필요한 연산 수행
+    ```
 
 - 지그재그 순회
 
-  ```python
-  # i 행의 좌표
-  # j 열의 좌표
-  
-  for i in range(n):
-    for j in range(m):
-      Array[i][j + (m-1-2*j) * (i%2)] # 필요한 연산 수행
-  ```
+    ```python
+    # i 행의 좌표
+    # j 열의 좌표
+    
+    for i in range(n):
+      for j in range(m):
+        Array[i][j + (m-1-2*j) * (i%2)] # 필요한 연산 수행
+    ```
 
 - 델타를 이용한 2차 배열 탐색
   - 2차 배열의 한 좌표에서 4방향의 인접 배열 요소를 탐색하는 방법
 
-  ```python
-  n = 10 # 10 x 10 배열 델타 탐색
-  lst = [0]*n
-  arr = list(lst for _ in range(n))
+      ```python
+      n = 10 # 10 x 10 배열 델타 탐색
+      lst = [0]*n
+      arr = list(lst for _ in range(n))
 
-  di = [0, 0, -1, 1]
-  dj = [1, -1, 0, 0] # 상하좌우
-  
-  for i in range(n): # 행 탐색
-    for j in range(n): # 열 탐색
-      for k in range(4): # 상하좌우 탐색
-        ni, nj = i + di[k], j + dj[k] # 이동할 (next) i, j
-        # 범위내인지 확인 후 사용
-        if 0<=ni<N and 0<=nj<N:
-          if mat[i][j] > mat[ni][nj]:
-            ans += (mat[i][j] - mat[ni][nj])
-          else:
-            ans += (mat[ni][nj] - mat[i][j]) 
-  print(f'#{tc} {ans}')
-  ```
+      di = [0, 0, -1, 1]
+      dj = [1, -1, 0, 0] # 상하좌우
+      
+      for i in range(n): # 행 탐색
+        for j in range(n): # 열 탐색
+          for k in range(4): # 상하좌우 탐색
+            ni, nj = i + di[k], j + dj[k] # 이동할 (next) i, j
+            # 범위내인지 확인 후 사용
+            if 0<=ni<N and 0<=nj<N:
+              if mat[i][j] > mat[ni][nj]:
+                ans += (mat[i][j] - mat[ni][nj])
+              else:
+                ans += (mat[ni][nj] - mat[i][j]) 
+      print(f'#{tc} {ans}')
+      ```
 
   - 전치 행렬
 
-    ```python
-    # i : 행의 좌표, len(arr)
-    # j : 열의 좌표, len(arr[0])
-    arr = [[1, 2, 3], [4, 5, 6], [7, 8, 9]] # 3*3 행렬
+      ```python
+      # i : 행의 좌표, len(arr)
+      # j : 열의 좌표, len(arr[0])
+      arr = [[1, 2, 3], [4, 5, 6], [7, 8, 9]] # 3*3 행렬
 
-    for i in range(3):
-      for j in range(3):
-        if i < j:
-          arr[i][j], arr[j][i] = arr[j][i], arr[i][j]
-    ```
+      for i in range(3):
+        for j in range(3):
+          if i < j:
+            arr[i][j], arr[j][i] = arr[j][i], arr[i][j]
+      ```
 
 ### 부분집합 생성하기
 - 각 원소가 부분집합에 포함되었는지를 loop 이용하여 확인하고 부분집합을 생성하는 방법
 
-  ```python
-  bit = [0, 0, 0, 0]
-  for i in range(2):
-    bit[0] = i  # 0번째 원소
-    for k in range(2):
-      bit[1] = j  # 1번째 원소
+    ```python
+    bit = [0, 0, 0, 0]
+    for i in range(2):
+      bit[0] = i  # 0번째 원소
       for k in range(2):
-        bit[2] = k  # 2번째 원소
-        for l in range(2):
-          bit[3] = l  # 3번째 원소
-          print_subset(bit) # 생성된 부분집합 출력
-  ```
+        bit[1] = j  # 1번째 원소
+        for k in range(2):
+          bit[2] = k  # 2번째 원소
+          for l in range(2):
+            bit[3] = l  # 3번째 원소
+            print_subset(bit) # 생성된 부분집합 출력
+    ```
 
 ### 비트 연산자
 - 비트 연산자
@@ -111,18 +110,18 @@ List_2
   - **i&(i<<j)** : i의 j번째 비트가 1인지 아닌지를 검사함.
 - 비트 연산자를 이용하여 보다 간결하게 부분집합 생성
 
-  ```python
-  arr = [3, 6, 7, 1, 5, 4]
+    ```python
+    arr = [3, 6, 7, 1, 5, 4]
 
-  n = len(arr) # n : 원소의 개수
+    n = len(arr) # n : 원소의 개수
 
-  for i in range(1<<n): # 1 << n : 부분 집합의 개수
-    for j in range(n): # 원소의 수 만큼 비트를 비교함.
-      if i & (1<<j):
-        print(arr[j], end=', ')
+    for i in range(1<<n): # 1 << n : 부분 집합의 개수
+      for j in range(n): # 원소의 수 만큼 비트를 비교함.
+        if i & (1<<j):
+          print(arr[j], end=', ')
+      print()
     print()
-  print()
-  ```
+    ```
 
 ## 검색
 - 저장되어 있는 자료 중에서 원하는 항목을 찾는 작업
@@ -149,16 +148,16 @@ List_2
     - 시간 복잡도 : $O(n)$
   - 구현 예
 
-    ```python
-    def sequentialSearch(a, n, key):
-      i = 0
-      while i < n and a[i] != key:
-        i += 1
-      if i < n: # index out of range를 방지하기 위한 조건문
-        return i
-      else:
-        return -1 
-    ```
+      ```python
+      def sequentialSearch(a, n, key):
+        i = 0
+        while i < n and a[i] != key:
+          i += 1
+        if i < n: # index out of range를 방지하기 위한 조건문
+          return i
+        else:
+          return -1 
+      ```
 
 - **정렬되어 있는 경우**
   - 검색 과정
@@ -169,16 +168,16 @@ List_2
     - 시간 복잡도 : $O(n)$
   - 구현 예
 
-    ```python
-    def sequentialSearch2(a, n, key):
-      i = 0
-      while i<n and a[i]<key:
-        i += 1
-      if i<n and a[i]==key:
-        return i
-      else:
-        return -1
-    ```
+      ```python
+      def sequentialSearch2(a, n, key):
+        i = 0
+        while i<n and a[i]<key:
+          i += 1
+        if i<n and a[i]==key:
+          return i
+        else:
+          return -1
+      ```
 
 ### 이진 검색(Bianry search)
 - 자료의 가운데에 있는 항목의 키 값과 비교하여 다음 검색의 위치를 결정하고 검색을 계속 진행하는 방법
@@ -193,37 +192,37 @@ List_2
   - 검색 범위의 시작점과 종료점을 이용하여 검색을 반복 수행.
   - 이진 검색의 경우, 자료 삽입 및 삭제가 발생했을 때 배열의 상태를 항상 정렬상태로 유지하는 작업이 필수적임.
 
-  ```python
-  def binarySearch(a, N, key):
-    start = 0
-    end = N-1
-    while start <= end:
-      middle = (start+end)//2
-      if a[middle] == key:
-        return True # 검색 성공
-      elif a[middle] > key:
-        end = middle - 1
-      else:
-        start = middle + 1
-    return False # 검색 실패
-  ```
+    ```python
+    def binarySearch(a, N, key):
+      start = 0
+      end = N-1
+      while start <= end:
+        middle = (start+end)//2
+        if a[middle] == key:
+          return True # 검색 성공
+        elif a[middle] > key:
+          end = middle - 1
+        else:
+          start = middle + 1
+      return False # 검색 실패
+    ```
 
 - 재귀함수 이용
   - 재귀함수를 이용하여 이진 검색을 구현.
 
-  ```python
-  def binarySearch2(a, low, high, key):
-    if low>high: # 검색실패
-      return False
-    else:
-      middle = (low+high) // 2
-      if key == a[middle]: # 검색성공
-        return True
-      elif key < a[middle]:
-        return binarySearch2(a, low, middle-1, key)
-      elif a[middle] < key:
-        return binarySearch2(a, middle+1, high, key)
-  ```
+      ```python
+      def binarySearch2(a, low, high, key):
+        if low>high: # 검색실패
+          return False
+        else:
+          middle = (low+high) // 2
+          if key == a[middle]: # 검색성공
+            return True
+          elif key < a[middle]:
+            return binarySearch2(a, low, middle-1, key)
+          elif a[middle] < key:
+            return binarySearch2(a, middle+1, high, key)
+      ```
 
 ### 인덱스
 - 인덱스는 테이블에 대한 동작 속도를 높여주는 자료구조. 
@@ -248,15 +247,15 @@ List_2
   - 이를 원소의 직전 끝까지 반복.
 - 미정렬원소가 하나 남은 상황에서는 마지막 원소가 가장 큰 값을 가지므로, 실행을 종료하고 선택 정렬이 완료됨.
 
-  ```python
-  def SelectionSort(a, N):
-    for i in range(N-1):
-      minidx = i
-      for j in range(i+1, N):
-        if a[minidx] > a[j]:
-          minidx = j
-      a[i], a[minidx] = a[minidx], a[i]
-  ```
+    ```python
+    def SelectionSort(a, N):
+      for i in range(N-1):
+        minidx = i
+        for j in range(i+1, N):
+          if a[minidx] > a[j]:
+            minidx = j
+        a[i], a[minidx] = a[minidx], a[i]
+    ```
 
 ### 셀렉션 알고리즘
 - 저장되어 있는 자료부터 k번째로 큰 혹은 작은 원소를 찾은 방법
@@ -269,16 +268,16 @@ List_2
   - 배열의 k번째를 반환.
   - k가 비교적 작을때 유용.
 
-  ```python
-  def select(arr, k):
-    for i in range(0, k):
-      minidx = i
-      for j in range(i+1, len(arr)):
-        if arr[minidx] > arr[j]:
-          minidx = j
-      arr[i], arr[minidx] = arr[minidx], arr[i]
-    return arr[k-1]
-  ```
+      ```python
+      def select(arr, k):
+        for i in range(0, k):
+          minidx = i
+          for j in range(i+1, len(arr)):
+            if arr[minidx] > arr[j]:
+              minidx = j
+          arr[i], arr[minidx] = arr[minidx], arr[i]
+        return arr[k-1]
+      ```
 
 |알고리즘|평균 수행시간|최악 수행시간|알고리즘 기법|비고|
 |-----|-------|-----|------|-----|
