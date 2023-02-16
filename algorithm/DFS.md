@@ -91,5 +91,70 @@ dfs(graph, 0, visited)
     ['A', 'C', 'D']
     ```
 ## 백트레킹 (Backtracking)
+    ```python
+    def backtrack(a, k, input):
+        global MAXCANDIDATES
+        c = [0] * MAXCANDIDATES
 
+        if k == input:
+            for i in range(1, k + 1):
+                print(a[i], end=" ")
+            print()
+        else:
+            k += 1
+            ncandidates = construct_candidates(a, k, input, c)
+            for i in range(ncandidates):
+                a[k] = c[i]
+                backtrack(a, k, input)
+
+
+    def construct_candidates(a, k, input, c):
+        in_perm = [False] * NMAX
+
+        for i in range(1, k):
+            in_perm[a[i]] = True
+
+        ncandidates = 0
+        for i in range(1, input + 1):
+            if in_perm[i] == False:
+                c[ncandidates] = i
+                ncandidates += 1
+        return ncandidates
+
+    NMAX = 11
+    MAXCANDIDATES = 10
+    a = [0] * NMAX
+    backtrack(a, 0, 3)
+    ```
+### 부분 집합의 합
+1. bit와 재귀를 이용하여 부분집합을 구함.
+    ```python
+    def f(i, k, s, t):  # i원소, k 집합의 크기, s i-1까지 고려된 합, t목표
+    global cnt
+    global fcnt
+    fcnt += 1
+    if s > t:   # 고려한 원소의 합이 찾는 합보다 큰경우
+        return
+    elif s == t:    # 남은 원소를 고려할 필요가 없는 경우
+        cnt += 1
+        return
+    elif i == k:    # 모든원소 고려
+        return
+    else:
+        bit[i] = 1
+        f(i+1, k, s+A[i], t)    # A[i] 포함
+        bit[i] = 0
+        f(i+1, k, s, t)         # A[i] 미포함
+
+    #A = [1,2,3,4,5,6,7,8,9,10]
+    N = 10
+    A = [ i for i in range(1, N+1)]
+
+    key = 55
+    cnt = 0
+    bit = [0]*N
+    fcnt = 0
+    f(0,N,0,key)
+    print(cnt, fcnt)      # 합이 key인 부분집합의 수
+    ```
 ## 분할 정복 (Divide and Conquer)

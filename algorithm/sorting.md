@@ -18,7 +18,8 @@ Sorting
     for j in range(i+1, len(arr)):
         if arr[minidx] > arr[j]:
             minidx = j
-    arr[i], arr[minidx] = arr[minidx], arr[i] # 선택된 원소를 i ~ len(arr) 구간에서 가장 앞으로 보냄.
+    arr[i], arr[minidx] = arr[minidx], arr[i] 
+    # 선택된 원소를 i ~ len(arr) 구간에서 가장 앞으로 보냄.
 
   print(arr)
   ```
@@ -38,10 +39,13 @@ Sorting
   ```python
   arr = [7, 5, 4, 0, 3, 1, 6, 2, 9, 8]
 
-  for i in range(1, len(arr)): # 첫번째 원소는 이미 정렬되어 있다고 가정.
+  for i in range(1, len(arr)): 
+    # 첫번째 원소는 이미 정렬되어 있다고 가정.
     minidx = i
-    for j in range(i, 0, -1): # 인덱스 i부터 1까지 감소하면서 반복함. 시작 원소까지 반복해야하는 특징이 있음.
-        if arr[j] < arr[j-1]: # 한칸씩 왼쪽으로 이동함. 
+    for j in range(i, 0, -1): 
+      # 인덱스 i부터 1까지 감소하면서 반복함. 시작 원소까지 반복해야하는 특징이 있음.
+        if arr[j] < arr[j-1]: 
+          # 한칸씩 왼쪽으로 이동함. 
             arr[j], arr[j-1] = arr[j-1], arr[j]
         else:
             break
@@ -73,9 +77,11 @@ Sorting
   arr = [5, 7, 9, 0, 3, 1, 6, 2, 4, 8]
 
   def quick_sort(arr, start, end):
-    if start >= end: # 원소가 1개인 경우 종료
+    if start >= end: 
+      # 원소가 1개인 경우 종료
         return
-    pivot = start # 피벗은 첫 번째 원소
+    pivot = start 
+    # 피벗은 첫 번째 원소
     left = start + 1
     right = end
     while left <= right:
@@ -128,16 +134,19 @@ Sorting
 - 앞서 다루었던 3가지 정렬 알고리즘처럼 직접 데이터 값을 비교한 뒤에 위치를 변경하며 정렬하는 방식이 아님.
   ```python
   # 모든 원소의 값이 0보다 크거나 같은 자료형일때.
-  arr = [5, 9, 0, 1, 6, 2, 9, 1, 8, 0, 2]
   # 모든 범위를 포함하는 리스트 선언(이때, 모든 값은 0으로 초기화)
+  arr = [5, 9, 0, 1, 6, 2, 9, 1, 8, 0, 2]
   cnt_lst = [0] * (max(arr + 1))
 
   for i in range(len(arr)):
-    cnt_lst(arr[i]) += 1 # 각 데이터에 해당하는 인덱스 값 증가
+    cnt_lst(arr[i]) += 1 
+    # 각 데이터에 해당하는 인덱스 값 증가
 
-  for i in range(len(cnt_lst)): # 리스트에 기록된 정보 확인.
+  for i in range(len(cnt_lst)): 
+    # 리스트에 기록된 정보 확인.
     for j in range(cnt_lst[i]):
-        print(i, end=' ') # 띄어쓰기를 구분으로 등장한 횟수만큼 인덱스 출력
+        print(i, end=' ') 
+        # 띄어쓰기를 구분으로 등장한 횟수만큼 인덱스 출력
   ```
 - 계수 정렬의 시간복잡도
   - $O(n + k)$
