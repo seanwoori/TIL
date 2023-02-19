@@ -15,9 +15,9 @@ def left(lst, lmx_idx):
     lmx=lst[0][1]
     ans=0
     l=0
-    while l<=lmx_idx:
+    while l<=(lmx_idx-1):
+        ans += (lst[l+1][0] - lst[l][0])*lmx
         l+=1
-        ans+=(lst[l][0]-lst[l-1][0])*lmx
         if lmx<lst[l][1]:
             lmx=lst[l][1]
     return ans
@@ -26,9 +26,9 @@ def right(lst, rmx_idx):
     rmx=lst[len(lst)-1][1]
     ans=0
     r = len(lst)-1
-    while r>=rmx_idx:
+    while r>=(rmx_idx+1):
+        ans += (lst[r][0] - lst[r - 1][0]) * rmx
         r-=1
-        ans+=(lst[r][0]-lst[r-1][0])*rmx
         if rmx<lst[r][1]:
             rmx=lst[r][1]
     return ans
@@ -53,11 +53,10 @@ lmx_idx=min(idx)
 # 두번째 변수는 높이값
 # 왼쪽 인덱스와 오른쪽 인덱스 초기화
 ans = 0
-
-if rmx_idx==lmx_idx:
+ans+=left(lst,lmx_idx)+right(lst,rmx_idx)
+if rmx_idx==lmx_idx and not ans:
     ans+=mval
 else:
-    ans+= mval*(lst[rmx_idx][1]-lst[lmx_idx][1])
+    ans+= mval*(lst[rmx_idx][0]-lst[lmx_idx][0]+1)
 
-ans+=left(lst,lmx_idx)+right(lst,rmx_idx)
 print(ans)
