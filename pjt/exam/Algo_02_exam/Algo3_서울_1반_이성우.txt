@@ -1,0 +1,37 @@
+<<<소문제 1번>>>
+'''
+[1] 빈 스택을 만들고 초기 정답 ans를 'NO'라 저장. stk=[], ans='NO'
+[2] 문자열을 str type으로 입력받는다.
+[3] for loop를 이용하여 문자열의 문자 ch를 하나씩 돌며, ch가 '('가 라면 stk에 push.
+[4] ch가 닫는 괄호 ')'라면 stk pop. 이때 stk가 비었다면 for loop를 빠져나온다.
+[5] for loop를 끝까지 돌았다면, stk이 비었는지 확인한다. 만약 stk가 비었다면 ans='YES'.
+[6] 정답 출력.
+'''
+
+# 예시 코드
+stk=[]
+ans='NO'
+st=input()
+
+for ch in st:
+    if ch=='(':
+        stk.append(ch)
+    elif ch==')':
+        if stk:
+            stk.pop()
+        else:
+            break
+else:
+    if not stk:
+        ans='YES'
+
+print(ans)
+
+<<<소문제 2번>>>
+['('] # 여는 괄호를 만나 push
+['(', '('] # 여는 괄호를 만나 push
+['('] # 닫는 괄호를 만나 pop
+['(', '('] # 여는 괄호를 만나 push
+['('] # 닫는 괄호를 만나 pop
+[] # 닫는 괄호를 만나 pop
+# pop을 한번 더 해야하지만, stk 원소가 없어 오류 출력.
