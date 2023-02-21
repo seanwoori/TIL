@@ -76,6 +76,7 @@ dfs(graph, 0, visited)
         print("Finding path from node 'A' to node 'D':")
         print(dfs_path(graph, 'A', 'D'))
     ```
+
     ```markdown
     # output
     Finding path from node 'A' to node 'D':
@@ -90,42 +91,43 @@ dfs(graph, 0, visited)
     Visiting node D, current path: ['A', 'C', 'D']
     ['A', 'C', 'D']
     ```
+
 ## 백트레킹 (Backtracking)
-    ```python
-    def backtrack(a, k, input):
-        global MAXCANDIDATES
-        c = [0] * MAXCANDIDATES
+```python
+def backtrack(a, k, input):
+    global MAXCANDIDATES
+    c = [0] * MAXCANDIDATES
 
-        if k == input:
-            for i in range(1, k + 1):
-                print(a[i], end=" ")
-            print()
-        else:
-            k += 1
-            ncandidates = construct_candidates(a, k, input, c)
-            for i in range(ncandidates):
-                a[k] = c[i]
-                backtrack(a, k, input)
+    if k == input:
+        for i in range(1, k + 1):
+            print(a[i], end=" ")
+        print()
+    else:
+        k += 1
+        ncandidates = construct_candidates(a, k, input, c)
+        for i in range(ncandidates):
+            a[k] = c[i]
+            backtrack(a, k, input)
 
 
-    def construct_candidates(a, k, input, c):
-        in_perm = [False] * NMAX
+def construct_candidates(a, k, input, c):
+    in_perm = [False] * NMAX
 
-        for i in range(1, k):
-            in_perm[a[i]] = True
+    for i in range(1, k):
+        in_perm[a[i]] = True
 
-        ncandidates = 0
-        for i in range(1, input + 1):
-            if in_perm[i] == False:
-                c[ncandidates] = i
-                ncandidates += 1
-        return ncandidates
+    ncandidates = 0
+    for i in range(1, input + 1):
+        if in_perm[i] == False:
+            c[ncandidates] = i
+            ncandidates += 1
+    return ncandidates
 
-    NMAX = 11
-    MAXCANDIDATES = 10
-    a = [0] * NMAX
-    backtrack(a, 0, 3)
-    ```
+NMAX = 11
+MAXCANDIDATES = 10
+a = [0] * NMAX
+backtrack(a, 0, 3)
+```  
 ### 부분 집합의 합
 1. bit와 재귀를 이용하여 부분집합을 구함.
     ```python
