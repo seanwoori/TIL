@@ -50,31 +50,31 @@ dfs(graph, 0, visited)
 
 - 최적 거리 탐색
     ```python
-        def dfs_path(graph, start, end, path=[]):
-            path = path + [start]
-            print(f"Visiting node {start}, current path: {path}")
-            if start == end:
-                return path
-            shortest_path = None
-            for node in graph[start]:
-                if node not in path:
-                    new_path = dfs_path(graph, node, end, path)
-                    if new_path:
-                        if not shortest_path or len(new_path) < len(shortest_path):
-                            shortest_path = new_path
-            return shortest_path
+    def dfs_path(graph, start, end, path=[]):
+        path = path + [start]
+        print(f"Visiting node {start}, current path: {path}")
+        if start == end:
+            return path
+        shortest_path = None
+        for node in graph[start]:
+            if node not in path:
+                new_path = dfs_path(graph, node, end, path)
+                if new_path:
+                    if not shortest_path or len(new_path) < len(shortest_path):
+                        shortest_path = new_path
+        return shortest_path
 
-        graph = {
-            'A': ['B', 'C'],
-            'B': ['A', 'C', 'D'],
-            'C': ['A', 'B', 'D'],
-            'D': ['B', 'C'],
-            'E': ['F'],
-            'F': ['C']
-        }
+    graph = {
+        'A': ['B', 'C'],
+        'B': ['A', 'C', 'D'],
+        'C': ['A', 'B', 'D'],
+        'D': ['B', 'C'],
+        'E': ['F'],
+        'F': ['C']
+    }
 
-        print("Finding path from node 'A' to node 'D':")
-        print(dfs_path(graph, 'A', 'D'))
+    print("Finding path from node 'A' to node 'D':")
+    print(dfs_path(graph, 'A', 'D'))
     ```
 
     ```markdown
@@ -132,21 +132,21 @@ backtrack(a, 0, 3)
 1. bit와 재귀를 이용하여 부분집합을 구함.
     ```python
     def f(i, k, s, t):  # i원소, k 집합의 크기, s i-1까지 고려된 합, t목표
-    global cnt
-    global fcnt
-    fcnt += 1
-    if s > t:   # 고려한 원소의 합이 찾는 합보다 큰경우
-        return
-    elif s == t:    # 남은 원소를 고려할 필요가 없는 경우
-        cnt += 1
-        return
-    elif i == k:    # 모든원소 고려
-        return
-    else:
-        bit[i] = 1
-        f(i+1, k, s+A[i], t)    # A[i] 포함
-        bit[i] = 0
-        f(i+1, k, s, t)         # A[i] 미포함
+        global cnt
+        global fcnt
+        fcnt += 1
+        if s > t:   # 고려한 원소의 합이 찾는 합보다 큰경우
+            return
+        elif s == t:    # 남은 원소를 고려할 필요가 없는 경우
+            cnt += 1
+            return
+        elif i == k:    # 모든원소 고려
+            return
+        else:
+            bit[i] = 1
+            f(i+1, k, s+A[i], t)    # A[i] 포함
+            bit[i] = 0
+            f(i+1, k, s, t)         # A[i] 미포함
 
     #A = [1,2,3,4,5,6,7,8,9,10]
     N = 10
