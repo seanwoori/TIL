@@ -3,11 +3,14 @@ sys.stdin = open('input.txt', 'r')
 input=sys.stdin.readline
 
 def dfs_cnt(s):
-    global cnt
-    stk=[]
+    global cnt      # cnt 글로벌 선언
+    stk=[]          # dfs를 위한 stk 변수 선언
     # start 인덱스 설정
     while True:
+        # for loop를 통해 visited 배열 1~N까지 순회
         for i in range(s, N+1):
+            # 만약 0이면? 방문하지 않은 노드.
+            # 시작점 c를 i로 갱신
             if V[i]==0:
                 c=i
                 V[c]=1
@@ -32,9 +35,9 @@ def dfs_cnt(s):
 
 N,M=map(int, input().split())
 # 자기자신만 있는 노드 또한 연결요소이므로, 각 노드 인덱스에 자기자신을 추가.
-lst=[0]+list([i] for i in range(1,N+1))
-V=[0]*(N+1)
-cnt=0
+lst=[0]+list([i] for i in range(1,N+1)) # [0, 1, 2, 3, 4...]
+V=[0]*(N+1)                             # visited 배열 0으로 초기화 설정
+cnt=0                                   # 연결요소 갯수 변수
 
 for _ in range(M):
     u,v=map(int, input().split())
