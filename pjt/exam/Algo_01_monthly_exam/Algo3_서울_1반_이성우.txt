@@ -1,0 +1,12 @@
+1)
+
+def inorder(v):
+  for e in v:
+    inorder(v.left)
+    print(v)
+    inorder(v.right)
+
+2)
+
+중위 순회 B A D C E
+후위 순회 B D E C A
