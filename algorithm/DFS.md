@@ -159,4 +159,5 @@ backtrack(a, 0, 3)
     f(0,N,0,key)
     print(cnt, fcnt)      # 합이 key인 부분집합의 수
     ```
+
 ## 분할 정복 (Divide and Conquer)
