@@ -17,22 +17,18 @@ def detail(request, pk):
 
 def create(request):
     if request.method == 'POST':
-        form = ArticleForm(request.POST)
+        form = ArticleForm(request.POST, request.FILES)
         if form.is_valid():
             article = form.save() # 아티클 저장
             return redirect('articles:detail', pk=article.pk)
-
-    elif request.method == 'GET':
+        return redirect('articles:create')
+    
+    else:
         form = ArticleForm()
         context = {
-            'form' : form,
+            'form' : form
         }
         return render(request, 'articles/create.html', context)
-    
-    context = {
-        'form' : form
-    }
-    return render(request, 'articles/create.html', context)
     
     # if request.method == 'POST':
     #     title = request.POST.get('title')
@@ -43,8 +39,6 @@ def create(request):
     # else:
     #     return render(request, 'articles/create.html')
 
-def func():
-
 def delete(request, pk):
     article = Article.objects.get(pk=pk)
     article.delete()
@@ -54,10 +48,14 @@ def delete(request, pk):
 def update(request, pk):
     article = Article.objects.get(pk=pk)
     if request.method == 'POST':
-        article.title = request.POST.get('title')
-        article.content = request.POST.get('content')
-        article.save()
-        return redirect('articles:detail', pk=article.pk)
+        form = ArticleForm(request.POST, instance=article)
+        if form.is_valid():
+            form.save()
+            return redirect('article:detial', article.pk)
     else:
-        context = {'article': article}
+        form = ArticleForm(instance=article)
+        context = {
+            'form': form,
+            'article': article
+            }
         return render(request, 'articles/update.html', context)
