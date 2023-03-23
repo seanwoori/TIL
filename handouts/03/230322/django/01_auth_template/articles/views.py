@@ -47,3 +47,10 @@ def update(request, pk):
 
     context = {'form': form, 'article': article}
     return render(request, 'articles/update.html', context)
+
+
+def signup(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.isvalid():
+            
