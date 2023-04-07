@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>회원정보수정</h1>
+  <form action="{% url 'accounts:update' %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="수정하기">
+  </form>
+  <a href="{% url 'accoutns:index' %}">목록보기</a>  
+{% endblock content %}

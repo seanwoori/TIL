@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>수정 페이지</h1>
+<hr>
+<form action="{% url 'movies:update' pk %}" method="POST">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button>수정하기</button>
+</form>
+{% endblock content %}
