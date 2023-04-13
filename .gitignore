@@ -3,6 +3,7 @@
 
 ##### API KEYS #####
 config.py
+settings.py
 
 ### Django ###
 *.log
