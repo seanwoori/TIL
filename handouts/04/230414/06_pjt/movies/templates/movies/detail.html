@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>DETAIL</h1>
+  <hr>
+  <div>
+    <h5>{{ movie.title }}</h5>
+    <p>{{ movie.description }}</p>
+  </div>
+
+  {% if request.user == article.user %}
+    <a href="{% url 'articles:update' article.pk %}">수정하기</a>
+    <form action="{% url 'article:delete' article.pk %}">
+      {% csrf_token %}
+      <input type="submit" value="삭제하기">
+    </form><br>
+    <hr>
+  {% endif %}
+
+  <a href="{% url 'movies:index' %}">BACK</a>
+  <hr>
+
+  {% if comments %}
+    <p><b>{{comments|length}}개의 댓글</b></p>
+  {% endif %}
+
+  <ul>
+    {% for comment in comments %}
+      <li>
+        {{ comment.content}} - {{comment.user}}
+        {% if request.user == comment.user %}
+          <form action="{% url 'articles:comment_delete' article.pk comment.pk %}" method='POST'>
+            {% csrf_token %}
+            <input type="submit" value='삭제하기'>
+          </form>
+        {% endif %}
+      </li>
+    {% empty %}
+      <li>
+        댓글이 없습니다ㅠ
+      </li>
+    {% endfor %}
+  </ul>
+
+  {% if request.user.is_authenticated %}
+    <form action="{% url 'article:comment_create' article.pk %}" method="POST">
+      {% csrf_token %}
+      {{ comment.form }}
+      <input type="submit" value="저장">
+    </form>
+  {% else %}
+    <a href="{% url 'accounts:login' %}">댓글을 달려면 로그인해라잇</a>
+  {% endif %}
+
+  {% endblock  %}
