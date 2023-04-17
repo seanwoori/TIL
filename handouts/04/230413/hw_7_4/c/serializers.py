@@ -1,10 +1,10 @@
 # c- serializers.py
 class ArticleSerializer(serializers.ModelSerializer):
-    __(c)__ = serializers.IntegerField(
-        __(a)__='__(b)__',
+    comment_count = serializers.IntegerField(
+        source='comment_set.count',
         read_only=True,
     )
 
     class Meta:
         model = Article
-        fields = ('id', 'title', 'content', 'created_at', 'updated_at', '__(c)__',)
+        fields = ('id', 'title', 'content', 'created_at', 'updated_at', 'comment_count',)
