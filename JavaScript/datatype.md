@@ -68,7 +68,7 @@
 - 내장된 표현식을 허용하는 문자열 작성 방식
 - ES6+ 부터 지원
 - Backtick(``)을 이용하며, 여러 줄에 걸쳐 문자열을 정의할 수도 있고 JavaScript의 변수를 문자열 안에 바로 연결할 수 있는 이점이 있음
-- 표현식을 넣을 수 있는데, 이는 $와 중괄호(${expression})으로 표기
+- 표현식을 넣을 수 있는데, 이는 $ 와 중괄호(${expression})으로 표기
   ```javascript
   const age = 10
   const message = `홍길동은 ${age}세입니다.`
