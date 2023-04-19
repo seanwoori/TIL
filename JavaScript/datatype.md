@@ -152,8 +152,19 @@
 ### ToBoolean Conversions (자동 형변환)
 |데이터 타입|false|true|
 |----------|-----|----|
-|undefined|항상 false|X|
-|null|항상 false|X|
-|Number|0, -0, NaN|나머지 모든 경우|
-|String|빈 문자열|나머지 모든 경우|
-|Object|X|항상 true|
+|`undefined`|항상 false|X|
+|`null`|항상 false|X|
+|`Number`|0, -0, NaN|나머지 모든 경우|
+|`String`|빈 문자열|나머지 모든 경우|
+|`Object`|X|항상 true|
+
+## [참고] **중요** optional chaining
+```javascript
+const obj = {
+  a:1
+}
+
+console.log(obj.a.value) // 어떤 객체에게 속성에 대해 물어보면 있다고 함
+console.log(obj.value) // 반면, undefined에게 속성에 대해 물어보면 오류를 출력함
+console.log(obj.b?.value)
+```

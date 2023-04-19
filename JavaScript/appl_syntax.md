@@ -212,3 +212,114 @@
 |for|반복문|break, continue|블록 스코프|
 |for...in|반복문|객체 순회|블록 스코프|
 |for...of|반복문|iterable 순회|블록 스코프|
+
+## 함수
+### 개요
+- 참조 타입 중 하나로써 function 타입에 속함
+- JavaScript에서 함수를 정의하는 방법은 주로 2가지로 구분됨
+  - 함수 선언식
+  - 함수 표현식
+
+## Arrow Function
+### 화살표 함수 (Arrow Function)
+- "함수를 비교적 간결하게 정의할 수 있는 문법"
+- function 키워드와 중괄호를 이용한 구문을 짧게 사용하기 위해 탄생
+  1. function 키워드 생략 가능
+  2. 함수의 매개변수가 하나 뿐이라면 매개변수의 '()' 생략가능
+  3. 함수의 내용이 한 줄이라면 '{}'와 'return'도 생략가능
+- 화살표 함수는 항상 익명함수
+  - === 함수 표현식에서만 사용가능
+
+  ```javascript
+  const arrow1 = fucntion (name) {
+    return 'hello, ${name}'
+  }
+
+  // 1. function 키워드 삭제
+  const arrow2 = (name) => { return 'hello, ${name}' }
+
+  // 2. 인자가 1개일 경우에만 () 생략 가능
+  const arrow3 = name => { return 'hello, ${name}' }
+
+  const arrow4 = name => 'hello, ${name}'
+  ```
+
+## this
+- 어떠한 object를 가리키는 키워드
+  - (java에서의 this와 python에서의 self는 인스턴스 자기자신을 가리킴)
+- JavaScript의 함수는 호출될 때 this를 암묵적으로 전달받음
+- JavaScript에서의 this는 일반적인 프로그래밍 언어에서의 this와 조금 다르게 동작
+- JavaScript는 해당 **함수 호출 방식** 에 따라 this에 바인딩되는 객체가 달라짐
+- 즉, 함수를 선언할 때 this에 객체가 결정되는 것이 아니고, 함수를 호출할 때 **함수가 어떻게 호출 되었는지에 따라 동적으로 결정됨**
+
+### this INDEX
+1. 전역 문맥에서의 this
+2. 함수 문맥에서의 this
+   - 단순 호출
+   - Method (객체의 메서드로서)
+   - Nested
+
+### 전역 문맥에서의 this
+- 브라우저의 전역 객체인 window를 가리킴
+  - 전역객체는 모든 객체의 유일한 최상위 객체를 의미
+
+### 함수 문맥에서의 this
+- 함수의 this 키워드는 다른 언어와 조금 다르게 동작
+  - this의 값은 **함수를 호출한 방법에 의해 결정됨**
+  - 함수 내부에서 this의 값은 함수를 호출한 방법에 의해 좌우됨
+1. 단순호출
+   - 전역 객체를 가리킴
+   - 브라우저에서 전역은 window를 의미함 
+     ```javascript
+     const myFunc = function() {
+      console.log(this)
+     }
+     
+     // 브라우저
+     myFunc() // window
+     ```
+2. Method (Function in Object, 객체의 메서드로서)
+   - 메서드로 선언하고 호출한다면, 객체의 메서드이므로 해당 객체가 바인딩
+     ```javascript
+     const myObj = {
+      data: 1,
+      myFunc() {
+        console.log(this)
+        console.log(this.data)
+      }
+     }
+
+     myObj.myFunc()
+     ```
+3. Nested(Function 키워드)
+   - forEach의 콜백 함수에서의 this가 메서드의 객체를 가리키지 못하고 전역 객체 window를 가리킴
+   - 단순 호출 방식으로 사용되었기 때문
+   - 이를 해결하기 위해 등장한 함수 표현식이 바로 **화살표 함수**
+   - 화살표 함수에서 this는 자신을 감싼 정적 범위
+   - 자동으로 한 단계 상위의 scope의 context를 바인딩
+     ```javascript
+     const myObj = {
+      numbers: [1],
+      myFunc() {
+        console.log(this)
+        this.numbers.forEach(function (num)
+        {
+          console.log(num)
+          console.log(this)
+        })
+      }
+     }
+
+     myObj.myFunc()
+     ```
+
+### 화살표 함수
+- 화살표 함수는 호출의 위치와 상관없이 상위 스코프를 가리킴 (Lexical scope this)
+- Lexical scope
+  - 함수를 어디서 호출하는지가 아니라 **어디에 선언** 하였는지에 따라 결정
+  - Static scope라고도 하며 대부분의 프로그래밍 언어에서 따르는 방식
+- 따라서 함수 내의 함수 상황에서 화살표 함수를 쓰는 것을 권장
+
+### this 정리
+- 이렇게 this가 런타임에 결정되면 장점도 있고 단점도 있음
+- 함수(메서드)를 하나만 만들어 여러 객체에서 재사용할 수 있다는 것은 장점이지만, 이런 유연함이 실수로 이어질 수 있다는 것은 단점
