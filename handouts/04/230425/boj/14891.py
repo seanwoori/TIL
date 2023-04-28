@@ -4,7 +4,7 @@ from collections import deque
 
 def check_right(start, dirs):
     # 더 이상 조사가 불가능한 경우
-    if start > 4 or gears[start-1][2] == gears[start][6]:
+    if start > 3 or gears[start-1][2] == gears[start][6]:
         return
 
     # 오른쪽 확인
@@ -16,7 +16,7 @@ def check_right(start, dirs):
 
 
 def check_left(start, dirs):
-    if start < 1 or gears[start][2] == gears[start+1][6]:
+    if start < 0 or gears[start][2] == gears[start+1][6]:
         return
     
     # 왼쪽 확인
@@ -25,12 +25,7 @@ def check_left(start, dirs):
         gears[start].rotate(dirs)
         
 
-gears = {}
-# 기준 톱니바퀴가 있을 때, 왼쪽과 맞닿는 지점은 idx 2, 오른쪽은 6이다.
-for i in range(1, 5):
-    gears[i] = deque(map(int, input().replace('/n', '')))
-print(gears)
-
+gears = [input() for _ in range(4)]
 n = int(input())
 
 for _ in range(n):
