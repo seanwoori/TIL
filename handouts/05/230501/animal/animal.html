@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <button @click="fetchAnimal">동물</button>
+    <!-- <button @click="fetchAnimal2">동물</button> -->
+    <br>
+    <img :src="imgSrc" alt="">
+    <!-- <img :src="imgSrc2" alt=""> -->
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        imgSrc : null,
+        imgSrc2 : null,
+      },
+      methods:{
+        fetchAnimal(){
+          const url = 'https://dog.ceo/api/breeds/image/random'
+          axios.get(url)
+          .then(res =>this.imgSrc = res.data.message)
+          .catch(err => console.error(err))
+        },
+        async fetchAnimal2(){
+          const url = 'https://dog.ceo/api/breeds/image/random'
+          const response = await axios.get(url)
+          this.imgSrc2 = response.data.message
+        }
+      },
+      computed: {
+        doubleCount(){
+          return this.count* 2
+        }
+      },
+      watch: {
+        count(){
+          console.log('count가 바뀜!')
+        }
+      }
+    })
+  </script>
+</body>
+</html>
