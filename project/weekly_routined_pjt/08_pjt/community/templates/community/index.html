@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Community</h1>
+  <hr>
+  {% for review in reviews %}
+  <div class="card">
+    <div class="card-body">
+        <h5 class="card-text">{{ review.pk }}</h5>
+          <h3 class="card-text">작성자 : <a href="{% url 'accounts:profile' review.user.username %}">{{ review.user }}</a></h3>
+          <h1 class="card-text"><a href="{% url 'community:detail' review.pk %}">{{ review.title }}</a></h1>
+          <h2 class="card-text">{{ review.content }}</h2>
+          <form id="like-forms" data-review-id="{{ review.pk }}">
+            {% csrf_token %}
+            {% if user in review.like_users.all %}
+              <input type="submit" value="좋아요 취소" id="like-{{ review.pk }}" class="btn btn-secondary">
+            {% else %}
+              <input type="submit" value="좋아요" id="like-{{ review.pk }}" class="btn btn-primary">
+            {% endif %}
+          </form>
+        <p>
+      <h5><span id="likes-count">{{ review.like_users.all|length }}</span> 명이 이 글을 좋아합니다.</h5>
+    </p>
+    
+  </div>
+</div>
+<br>
+  {% endfor %}
+<hr>
+{% endblock %}
+
+{% block script %}
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+  const forms = document.querySelectorAll('#like-forms')
+  const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+
+  forms.forEach((form) => {
+  
+    form.addEventListener('submit', function (event) {
+      event.preventDefault()
+      const reviewId = event.target.dataset.reviewId
+
+      axios({
+        method: 'post',
+        url: `/community/${reviewId}/like/`,
+        headers: {'X-CSRFToken': csrftoken,},
+      })
+      .then((response)=>{
+        const { isLiked, likesCount } = response.data
+  
+        const likeBtn = document.querySelector(`#like-${reviewId}`)
+        const likesCountTag = document.querySelector('#likes-count')
+  
+        if (isLiked) {
+          likeBtn.value = '좋아요 취소'
+          likeBtn.class = 'btn btn-secondary'
+        } else {
+          likeBtn.value = '좋아요'
+          likeBtn.class = 'btn btn-primary'
+        }
+
+        likesCountTag.innerText = likesCount
+      })
+      .catch((error)=>{
+        console.log(error)
+      })
+    })
+
+  })
+</script>
+{% endblock script %}

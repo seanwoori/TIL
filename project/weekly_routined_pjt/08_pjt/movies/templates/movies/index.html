@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Movies</h1>
+
+  <hr>
+  <div class="row">
+    {% for movie in movies %}
+      <a class=" col-4 mb-3" href="{% url 'movies:detail' movie.pk %}">
+        <div class="card-item effect11 left_to_right" >
+          <div class="poking">
+
+            <div class="img"><img src="{{ movie.poster_path }}" class="card-img" alt="..."></div>
+            <div class="info">
+              <h3 class="card-title bg-dark bg-opacity-50 fs-2 ">{{ movie.title }}</h3>
+              <p class="card-text bg-dark txt_post bg-opacity-25 fs-5 ">{{movie.overview}}</p>
+            </div>
+          </div>
+        </div>
+      </a>
+    {% endfor %}
+  </div>
+
+  <style>
+    .txt_post{
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 3; /* 라인수 */
+      -webkit-box-orient: vertical;
+      word-wrap:break-word; 
+      line-height: 1.2em;
+      height: 3.6em; /* line-height 가 1.2em 이고 3라인을 자르기 때문에 height는 1.2em * 3 = 3.6em */
+    }
+    
+    @charset "UTF-8";
+  .row {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      width: 1000px;
+  }
+  .card-item {
+      position: relative;
+      -webkit-transition: all 0.35s ease-in-out;
+      -moz-transition: all 0.35s ease-in-out;
+      transition: all 0.35s ease-in-out;
+    }
+    .card-item img {
+      width: 100%;
+      height: 100%;
+    }
+    
+    .card-item{
+      position: relative;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+    }
+    .card-item .img {
+      position: relative;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+    }
+    .card-item .img:before {
+      position: absolute;
+      display: block;
+      content: '';
+      width: 100%;
+      height: 100%;
+      box-shadow: inset 0 0 0 16px rgba(255, 255, 255, 0.6), 0 1px 2px rgba(0, 0, 0, 0.3);
+      -webkit-transition: all 0.35s ease-in-out;
+      -moz-transition: all 0.35s ease-in-out;
+      transition: all 0.35s ease-in-out;
+    }
+    .card-item .info {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      text-align: center;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+  .effect11 {
+      -webkit-perspective: 900px;
+      -moz-perspective: 900px;
+      perspective: 900px;
+    }
+  .effect11 .img {
+      opacity: 1;
+      -webkit-transform-origin: 50% 50%;
+      -moz-transform-origin: 50% 50%;
+      -ms-transform-origin: 50% 50%;
+      -o-transform-origin: 50% 50%;
+      transform-origin: 50% 50%;
+      -webkit-transition: all 0.35s ease-in-out;
+      -moz-transition: all 0.35s ease-in-out;
+      transition: all 0.35s ease-in-out;
+    }
+  .effect11.colored .info {
+      background: #1a4a72;
+    }
+  .effect11 .info {
+      background: #333333;
+      opacity: 0;
+      visibility: hidden;
+      -webkit-transition: all 0.35s ease 0.35s;
+      -moz-transition: all 0.35s ease 0.35s;
+      transition: all 0.35s ease 0.35s;
+    }
+  .effect11 .info h3 {
+      color: #fff;
+      text-transform: uppercase;
+      position: relative;
+      letter-spacing: 2px;
+      font-size: 22px;
+      margin: 0 30px;
+      padding: 55px 0 0 0;
+      height: 110px;
+      text-shadow: 0 0 1px white, 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+  .effect11 .info p {
+      color: #bbb;
+      padding: 10px 5px;
+      font-style: italic;
+      margin: 0 30px;
+      font-size: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.5);
+    }
+  .effect11 .poking:hover .img {
+      opacity: 0;
+    }
+  .effect11 .poking:hover .info {
+      visibility: visible;
+      opacity: 1;
+    }
+    
+  .effect11.left_to_right .img {
+      -webkit-transform: translateZ(0) rotateY(0);
+      -moz-transform: translateZ(0) rotateY(0);
+      -ms-transform: translateZ(0) rotateY(0);
+      -o-transform: translateZ(0) rotateY(0);
+      transform: translateZ(0) rotateY(0);
+    }
+  .effect11.left_to_right .info {
+      -webkit-transform: translateZ(-1000px) rotateY(-90deg);
+      -moz-transform: translateZ(-1000px) rotateY(-90deg);
+      -ms-transform: translateZ(-1000px) rotateY(-90deg);
+      -o-transform: translateZ(-1000px) rotateY(-90deg);
+      transform: translateZ(-1000px) rotateY(-90deg);
+    }
+  .effect11.left_to_right .poking:hover .img {
+      -webkit-transform: translateZ(-1000px) rotateY(90deg);
+      -moz-transform: translateZ(-1000px) rotateY(90deg);
+      -ms-transform: translateZ(-1000px) rotateY(90deg);
+      -o-transform: translateZ(-1000px) rotateY(90deg);
+      transform: translateZ(-1000px) rotateY(90deg);
+    }
+  .effect11.left_to_right .poking:hover .info {
+      -webkit-transform: translateZ(0) rotateY(0);
+      -moz-transform: translateZ(0) rotateY(0);
+      -ms-transform: translateZ(0) rotateY(0);
+      -o-transform: translateZ(0) rotateY(0);
+      transform: translateZ(0) rotateY(0);
+    }
+  
+
+  </style>
+{% endblock %}
+
+
