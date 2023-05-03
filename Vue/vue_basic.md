@@ -1,6 +1,6 @@
-Vue
+🎯Vue_basic
 ----------
-## Front-end Development with Vue
+## 📌Front-end Development with Vue
 ### 개요
 - Front-end 개발은 `Web App`또는 Web Site UI/UX를 제작하고 관리하는 과정
 - Front-end 프레임워크와 라이브러리(React, Angular, Vue.js)를 사용하여 개발 효율성을 높이고, Web App의 복잡성을 관리
@@ -49,7 +49,7 @@ Vue
   - 내용을 채우는 것은 AJAX 요청으로 얻은 JSON 데이터로 클라이언트 (블라우저)가 진행
 - 대체적으로 HTML에 작성된 내용을 기반으로 하는 검색 엔진에 빈 HTML을 공유하는 SPA 서비스가 노출되기는 어려움
 
-## Vue instance
+## 📌Vue instance
 ### MVVM Pattern
 - 소프트웨어 아키텍처 패턴의 일종
 - 마크업 언어로 구현하는 그래픽 사용자 인터페이스 **(view)**의 개발을 Back-end **(model)** 로부터 분리시켜 view가 어느 특정한 모델 플랫폼에 종속되지 않도록 함
