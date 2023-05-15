@@ -40,14 +40,10 @@
 
 ### TokenAuthentication 사용 방법
 - INSTALLED_APPS에서 rest_framework.authtoken 등록
-
-![image](https://github.com/hanulkimm/codingtestprep/assets/122726684/71d6a13d-91c9-4f1c-8b05-897de933769c)
-
 - User는 발급 받은 Token을 headers에 담아 요청과 함께 전송
   - 반드시 Token 문자열 함께 삽입
   - Token 문자열과 발급받은 실제 token 사이를 공백으로 구분
 
-![image](https://github.com/hanulkimm/codingtestprep/assets/122726684/d88b72ae-3cc3-4d2f-bfa9-f0226c72aff9)
 
 ## dj-rest-auth
 - 회원가입, 인증, 비밀번호 재설정, 사용자 세부 정보 검색, 회원 정보 수정 등을 위한 REST API end point 제공
@@ -64,8 +60,6 @@
 1. 패키지 설치
 2. App 등록
 3. url 등록
-
-![image](https://github.com/hanulkimm/codingtestprep/assets/122726684/911947f9-23b5-4a9e-80f3-319a7db0b941)
 
 ### Registration
 - `dj-rest-auth`는 소셜 회원가입을 지원함
