@@ -53,6 +53,3 @@ Data fundamentals
 
  - Gap analysis
   - 미래에 어떠한 임팩트를 줄지 현재 진행하고 있는 과정들을 평가
-
-## Data-driven decision making
-- 
